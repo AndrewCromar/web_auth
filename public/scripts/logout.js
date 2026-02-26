@@ -1,4 +1,3 @@
-// Logging out page behavior
 $(function() {
     $.post('../api/logout.php')
         .always(function() {

@@ -1,4 +1,3 @@
-// Handles the login page behavior
 $(function() {
     $('#loginForm').on('submit', function(e) {
         e.preventDefault();

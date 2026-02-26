@@ -1,4 +1,3 @@
-// Behavior for verify page
 $(function() {
     $('#verifyForm').on('submit', function(e) {
         e.preventDefault();
