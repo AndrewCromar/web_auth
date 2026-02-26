@@ -36,4 +36,4 @@ $update->execute();
 
 create_session($result['user_id']);
 
-json_response(['message' => 'Login successful', 'redirect' => '/']);
+json_response(['message' => 'Login successful']);

@@ -4,41 +4,84 @@
     <meta charset="UTF-8">
     <title>Verify Code - andrewcromar.org</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    </head>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; padding-top: 100px; background: #f9f9f9; }
+        .card { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
+        
+        /* Styling the code input for better readability */
+        input { 
+            width: 100%; 
+            padding: 12px; 
+            margin: 20px 0; 
+            box-sizing: border-box; 
+            font-size: 24px; 
+            text-align: center; 
+            letter-spacing: 8px; 
+            border: 2px solid #ddd;
+            border-radius: 4px;
+        }
+        input:focus { border-color: #007bff; outline: none; }
+        
+        button { width: 100%; padding: 10px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+        button:disabled { background: #ccc; }
+        
+        .msg { margin-top: 1rem; font-size: 0.9rem; min-height: 1.2em; }
+        .email-display { font-weight: bold; color: #555; }
+    </style>
+</head>
 <body>
 
 <div class="card">
     <h2>Verify Code</h2>
-    <p>Enter the 6-digit code sent to your email.</p>
+    <p>Sent to <span id="displayEmail" class="email-display">your email</span></p>
+    
     <form id="verifyForm">
-        <input type="text" id="code" placeholder="123456" maxlength="6" required pattern="\d{6}">
+        <input type="text" id="code" placeholder="000000" maxlength="6" required pattern="\d{6}" inputmode="numeric">
         <button type="submit" id="btnVerify">Verify & Login</button>
     </form>
     <div id="message" class="msg"></div>
 </div>
 
 <script>
-$('#verifyForm').on('submit', function(e) {
-    e.preventDefault();
+$(document).ready(function() {
     const email = localStorage.getItem('auth_email');
-    const code = $('#code').val();
-
-    if(!email) {
-        alert('Session lost. Please try logging in again.');
+    
+    // Show the email they are verifying for (better UX)
+    if (email) {
+        $('#displayEmail').text(email);
+    } else {
+        alert('No email found. Returning to login.');
         window.location.href = 'login.html';
-        return;
     }
 
-    $.post('../api/verify_code.php', { email: email, code: code })
-        .done(function(data) {
-            $('#message').css('color', 'green').text('Success! Redirecting...');
-            const params = new URLSearchParams(window.location.search);
-            window.location.href = params.get('redirect') || 'https://wishlist.andrewcromar.org';
-        })
-        .fail(function(xhr) {
-            const err = xhr.responseJSON ? xhr.responseJSON.error : 'Invalid code';
-            $('#message').css('color', 'red').text(err);
-        });
+    $('#verifyForm').on('submit', function(e) {
+        e.preventDefault();
+        const code = $('#code').val();
+        const $btn = $('#btnVerify');
+
+        $btn.prop('disabled', true).text('Checking...');
+        $('#message').text('');
+
+        $.post('../api/verify_code.php', { email: email, code: code })
+            .done(function(data) {
+                $('#message').css('color', 'green').text('Success! Redirecting...');
+                
+                // Retrieve the redirect from the URL query string
+                const params = new URLSearchParams(window.location.search);
+                const destination = params.get('redirect') || 'https://wishlist.andrewcromar.org';
+                
+                setTimeout(() => {
+                    window.location.href = destination;
+                }, 800);
+            })
+            .fail(function(xhr) {
+                const err = xhr.responseJSON ? xhr.responseJSON.error : 'Invalid code';
+                $('#message').css('color', 'red').text(err);
+                $btn.prop('disabled', false).text('Verify & Login');
+                // Clear input on failure so they can try again
+                $('#code').val('').focus(); 
+            });
+    });
 });
 </script>
 
