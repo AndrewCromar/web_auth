@@ -1,0 +1,9 @@
+:root {
+    --font-family: sans-serif;
+    --background-color: #f9f9f9;
+    --card-background: white;
+    --button-background: #007bff;
+    --button-color: #fff;
+    --button-disabled-background: #ccc;
+    --input-border: #ddd;
+}
