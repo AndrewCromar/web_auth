@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verify Code - andrewcromar.org</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    </head>
+<body>
+
+<div class="card">
+    <h2>Verify Code</h2>
+    <p>Enter the 6-digit code sent to your email.</p>
+    <form id="verifyForm">
+        <input type="text" id="code" placeholder="123456" maxlength="6" required pattern="\d{6}">
+        <button type="submit" id="btnVerify">Verify & Login</button>
+    </form>
+    <div id="message" class="msg"></div>
+</div>
+
+<script>
+$('#verifyForm').on('submit', function(e) {
+    e.preventDefault();
+    const email = localStorage.getItem('auth_email');
+    const code = $('#code').val();
+
+    if(!email) {
+        alert('Session lost. Please try logging in again.');
+        window.location.href = 'login.html';
+        return;
+    }
+
+    $.post('../api/verify_code.php', { email: email, code: code })
+        .done(function(data) {
+            $('#message').css('color', 'green').text('Success! Redirecting...');
+            const params = new URLSearchParams(window.location.search);
+            window.location.href = params.get('redirect') || 'https://wishlist.andrewcromar.org';
+        })
+        .fail(function(xhr) {
+            const err = xhr.responseJSON ? xhr.responseJSON.error : 'Invalid code';
+            $('#message').css('color', 'red').text(err);
+        });
+});
+</script>
+
+</body>
+</html>
