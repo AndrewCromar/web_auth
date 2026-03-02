@@ -1,7 +1,10 @@
-body {
-    font-family: var(--font-family);
-    display: flex;
-    justify-content: center;
-    padding-top: 100px;
-    background: var(--background-color);
+html, body
+{
+    background-color: var(--background-color);
+    color: var(--text-color);
+
+    margin: 0;
+    padding: 0;
+
+    font-family: var(--font);
 }

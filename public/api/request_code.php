@@ -28,7 +28,7 @@ if ($user) {
         json_response(['message' => 'If this email is registered, a code has been sent.']);
     } else {
         json_response([
-            'message' => 'DEV MODE: Email not sent.',
+            'message' => 'DM: Email not sent.',
             'dev_code' => $code 
         ]);
     }

@@ -1,22 +1,31 @@
 <link rel="stylesheet" href="../styles/root.css">
 <link rel="stylesheet" href="../styles/main.css">
-<link rel="stylesheet" href="../styles/forms.css">
-<link rel="stylesheet" href="../styles/card.css">
-<link rel="stylesheet" href="../styles/spinner.css">
+<link rel="stylesheet" href="../styles/content.css">
+<link rel="stylesheet" href="../styles/center-center.css">
+<link rel="stylesheet" href="../styles/form.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-<title>Verify Code</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-<div class="card">
-    <h2>Verify Code</h2>
-    <p>Sent to <span id="displayEmail" class="email-display">your email</span></p>
-    
-    <form id="verifyForm">
-        <input type="text" id="code" class="code-input" placeholder="000000" maxlength="6" required pattern="\d{6}" inputmode="numeric">
-        <button type="submit" id="btnVerify">Verify & Login</button>
-    </form>
-    <div id="message" class="msg"></div>
+<title>AUTH</title>
+
+<div class="content">
+    <div class="center-center">
+        <div>
+            <center>
+                <h2>Enter Verification Code </h2>
+            </center>
+            <p>Sent to <span id="displayEmail" class="email-display">your email</span>.</p>
+            <form id="verify_form">
+                <input type="text" id="verify_code" class="input_code" placeholder="000000" maxlength="6" required pattern="\d{6}" inputmode="numeric">
+                <button type="submit" id="verify_submit">Verify & Login</button>
+            </form>
+            <div id="output" class="output"></div>
+        </div>
+    </div>
 </div>
 
 <script src="../scripts/verify.js"></script>
