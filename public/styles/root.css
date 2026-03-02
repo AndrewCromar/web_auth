@@ -1,0 +1,15 @@
+:root {
+    --background-color-lighter-border: rgba(67, 67, 67);
+    --background-color-lighter: rgba(50, 50, 50);
+
+    --background-color-light-border: rgba(59, 59, 59);
+    --background-color-light: rgba(42, 42, 42);
+
+    --background-color: rgba(24, 24, 24);
+
+    --text-color: white;
+
+    --accent: rgb(17, 138, 36);
+
+    --font: "Roboto", monospace;
+}
