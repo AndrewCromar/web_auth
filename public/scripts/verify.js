@@ -1,8 +1,8 @@
 $(function() {
-    $('#verifyForm').on('submit', function(e) {
+    $('#verify_form').on('submit', function(e) {
         e.preventDefault();
         const email = localStorage.getItem('auth_email');
-        const code = $('#code').val();
+        const code = $('#verify_code').val();
 
         if (!email) {
             alert('Session lost. Please try logging in again.');
@@ -12,13 +12,13 @@ $(function() {
 
         $.post('../api/verify_code.php', { email: email, code: code })
             .done(function(data) {
-                $('#message').css('color', 'green').text('Success! Redirecting...');
+                $('#output').css('color', 'green').text('Success! Redirecting...');
                 const params = new URLSearchParams(window.location.search);
                 window.location.href = params.get('redirect') || 'https://wishlist.andrewcromar.org';
             })
             .fail(function(xhr) {
                 const err = xhr.responseJSON ? xhr.responseJSON.error : 'Invalid code';
-                $('#message').css('color', 'red').text(err);
+                $('#output').css('color', 'red').text(err);
             });
     });
 });
