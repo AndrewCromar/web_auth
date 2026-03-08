@@ -1,9 +1,8 @@
 <link rel="stylesheet" href="../styles/root.css">
 <link rel="stylesheet" href="../styles/main.css">
-<link rel="stylesheet" href="../styles/content.css">
-<link rel="stylesheet" href="../styles/center-center.css">
 <link rel="stylesheet" href="../styles/form.css">
 <link rel="stylesheet" href="../styles/spinner.css">
+<link rel="stylesheet" href="../styles/dashboard.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
@@ -13,30 +12,120 @@
 
 <title>AUTH</title>
 
-<div class="content">
-    <div class="center-center">
-        <div id="loading">
-            <center>
-                <div class="spinner"></div>
-                <p>Loading...</p>
-            </center>
+<div id="loading" style="display: flex; align-items: center; justify-content: center; height: 100vh;">
+    <center>
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </center>
+</div>
+
+<div id="logged_out" style="display: none; align-items: center; justify-content: center; height: 100vh;">
+    <center>
+        <h2>Not Logged In</h2>
+        <p>You are not currently logged in.</p>
+        <button id="login_btn" style="width: auto; padding: 10px 32px;">Login</button>
+    </center>
+</div>
+
+<div class="dashboard" id="dashboard" style="display: none;">
+    <div class="header-left">
+        <h2 style="margin: 0;">AUTH</h2>
+    </div>
+
+    <div class="header-right">
+        <h2 id="page-title" style="margin: 0;">Hello!</h2>
+    </div>
+
+    <div class="nav">
+        <div class="nav-top">
+            <button class="nav-btn active" data-page="home">Home</button>
+            <button class="nav-btn" data-page="myinfo" data-title="My Info">My Info</button>
+            <button class="nav-btn" data-page="mailing" data-title="Mailing Address">Mailing</button>
+        </div>
+        <div class="nav-bottom">
+            <button class="nav-btn" id="logout_btn">Sign Out</button>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="page active" id="page-home">
+            <div class="profile-completion" style="display: none;">
+                <h3 class="info-group-title">Profile Completion</h3>
+                <p class="completion-status"></p>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <div class="checklist"></div>
+            </div>
         </div>
 
-        <div id="logged_in" style="display: none;">
-            <center>
-                <h2>Account</h2>
-            </center>
-            <p><strong>ID:</strong> <span id="user_id"></span></p>
-            <p><strong>Email:</strong> <span id="user_email"></span></p>
-            <button id="logout_btn">Logout</button>
+        <div class="page" id="page-myinfo">
+            <div class="info-groups">
+                <div class="info-group">
+                    <h3 class="info-group-title">Personal Info</h3>
+                    <div class="info-row">
+                        <div class="info-field">
+                            <label for="info_first_name">First name</label>
+                            <input type="text" id="info_first_name" placeholder="First name">
+                        </div>
+                        <div class="info-field">
+                            <label for="info_last_name">Last name</label>
+                            <input type="text" id="info_last_name" placeholder="Last name">
+                        </div>
+                    </div>
+                    <div class="info-field">
+                        <label for="info_birthday">Birthday</label>
+                        <input type="date" id="info_birthday">
+                    </div>
+                    <button id="save_personal_btn">Save Changes</button>
+                </div>
+
+                <div class="info-group">
+                    <h3 class="info-group-title">Phone</h3>
+                    <div class="info-field">
+                        <label for="info_phone">Phone number</label>
+                        <input type="tel" id="info_phone" placeholder="Phone number">
+                    </div>
+                    <button id="save_phone_btn">Save Changes</button>
+                </div>
+
+                <div class="info-group">
+                    <h3 class="info-group-title">Email</h3>
+                    <div class="info-field">
+                        <label for="info_email">Email address</label>
+                        <input type="text" id="info_email" readonly>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div id="logged_out" style="display: none;">
-            <center>
-                <h2>Not Logged In</h2>
-            </center>
-            <p>You are not currently logged in.</p>
-            <button id="login_btn">Login</button>
+        <div class="page" id="page-mailing">
+            <div class="info-groups">
+                <div class="info-group">
+                    <h3 class="info-group-title">Mailing Address</h3>
+                    <div class="info-field">
+                        <label for="mail_street_1">Street address</label>
+                        <input type="text" id="mail_street_1" placeholder="Street address">
+                    </div>
+                    <div class="info-field">
+                        <label for="mail_street_2">Apt, suite, etc.</label>
+                        <input type="text" id="mail_street_2" placeholder="Apt, suite, etc.">
+                    </div>
+                    <div class="info-field">
+                        <label for="mail_city">City</label>
+                        <input type="text" id="mail_city" placeholder="City">
+                    </div>
+                    <div class="info-row">
+                        <div class="info-field">
+                            <label for="mail_state">State</label>
+                            <input type="text" id="mail_state" placeholder="CA" maxlength="2">
+                        </div>
+                        <div class="info-field">
+                            <label for="mail_zip">Zip code</label>
+                            <input type="text" id="mail_zip" placeholder="12345">
+                        </div>
+                    </div>
+                    <button id="save_mailing_btn">Save Changes</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
