@@ -34,6 +34,10 @@ $update = $db->prepare("UPDATE login_codes SET used = 1 WHERE id = ?");
 $update->bind_param("i", $result['id']);
 $update->execute();
 
+$verify_email = $db->prepare("UPDATE users SET email_verified = 1 WHERE id = ?");
+$verify_email->bind_param("i", $result['user_id']);
+$verify_email->execute();
+
 create_session($result['user_id']);
 
 json_response(['message' => 'Login successful']);

@@ -44,7 +44,7 @@ function validate_session($token) {
     $hash = hash('sha256', $token);
 
     $stmt = $db->prepare("
-        SELECT s.user_id AS id, u.email 
+        SELECT s.user_id AS id, u.email, u.first_name, u.last_name, u.date_of_birth, u.phone
         FROM sessions s
         JOIN users u ON s.user_id = u.id
         WHERE s.token_hash = ? 
