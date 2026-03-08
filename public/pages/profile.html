@@ -1,0 +1,51 @@
+<link rel="stylesheet" href="../styles/root.css">
+<link rel="stylesheet" href="../styles/main.css">
+<link rel="stylesheet" href="../styles/content.css">
+<link rel="stylesheet" href="../styles/center-center.css">
+<link rel="stylesheet" href="../styles/form.css">
+<link rel="stylesheet" href="../styles/spinner.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+<title>AUTH</title>
+
+<div class="content">
+    <div class="center-center">
+        <div id="loading">
+            <center>
+                <div class="spinner"></div>
+                <p>Loading...</p>
+            </center>
+        </div>
+
+        <div id="profile_form_container" style="display: none;">
+            <center>
+                <h2>Edit Profile</h2>
+            </center>
+            <p>Fill in your details below.</p>
+            <form id="profile_form">
+                <input type="email" id="profile_email" placeholder="Email" disabled>
+                <input type="text" id="profile_first_name" placeholder="First Name">
+                <input type="text" id="profile_last_name" placeholder="Last Name">
+                <input type="date" id="profile_dob" placeholder="Date of Birth">
+                <input type="tel" id="profile_phone" placeholder="Phone Number">
+                <button type="submit" id="profile_submit">Save</button>
+            </form>
+            <div id="output" class="output"></div>
+        </div>
+
+        <div id="logged_out" style="display: none;">
+            <center>
+                <h2>Not Logged In</h2>
+            </center>
+            <p>You need to be logged in to edit your profile.</p>
+            <button id="login_btn">Login</button>
+        </div>
+    </div>
+</div>
+
+<script src="../scripts/profile.js"></script>
