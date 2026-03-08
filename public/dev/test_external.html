@@ -1,0 +1,68 @@
+<link rel="stylesheet" href="../styles/root.css">
+<link rel="stylesheet" href="../styles/main.css">
+<link rel="stylesheet" href="../styles/content.css">
+<link rel="stylesheet" href="../styles/center-center.css">
+<link rel="stylesheet" href="../styles/form.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+<title>Test External Site</title>
+
+<div class="content">
+    <div class="center-center">
+        <div>
+            <center>
+                <h2>Test External Site</h2>
+                <p>Simulates another subdomain using auth.</p>
+            </center>
+
+            <div id="status" style="margin: 20px 0;"></div>
+
+            <button id="check_btn">Check Session</button>
+            <button id="login_btn" style="margin-top: 10px;">Login via Auth</button>
+            <button id="logout_btn" style="margin-top: 10px;">Logout via Auth</button>
+
+            <pre id="response" style="margin-top: 20px; padding: 10px; background: var(--background-color-light); border-radius: 10px; white-space: pre-wrap; word-wrap: break-word;"></pre>
+        </div>
+    </div>
+</div>
+
+<script>
+$(function() {
+    var authBase = window.location.origin + '/web_auth/public';
+    var thisPage = window.location.href;
+
+    function checkSession() {
+        $('#response').text('Checking...');
+        $.get(authBase + '/api/validate_session.php')
+            .done(function(data) {
+                $('#response').text(JSON.stringify(data, null, 2));
+                if (data.authenticated) {
+                    $('#status').html('<p style="color: var(--accent);">Logged in as ' + data.user.email + ' (ID: ' + data.user.id + ')</p>');
+                } else {
+                    $('#status').html('<p style="color: red;">Not authenticated</p>');
+                }
+            })
+            .fail(function(xhr) {
+                $('#response').text(xhr.responseText);
+                $('#status').html('<p style="color: red;">Not authenticated</p>');
+            });
+    }
+
+    checkSession();
+
+    $('#check_btn').on('click', checkSession);
+
+    $('#login_btn').on('click', function() {
+        window.location.href = authBase + '/pages/login.html?redirect=' + encodeURIComponent(thisPage);
+    });
+
+    $('#logout_btn').on('click', function() {
+        window.location.href = authBase + '/pages/logout.html?redirect=' + encodeURIComponent(thisPage);
+    });
+});
+</script>

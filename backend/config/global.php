@@ -5,6 +5,6 @@
 $live = false;
 
 $DB_servername = "localhost";
-$DB_username = "auth";
-$DB_password = "auth";
+$DB_username = "root";
+$DB_password = "";
 $DB_name = "auth";

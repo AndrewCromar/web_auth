@@ -4,7 +4,7 @@ $(function() {
             localStorage.removeItem('auth_email');
 
             const params = new URLSearchParams(window.location.search);
-            const redirectPath = params.get('redirect') || 'login.html';
+            const redirectPath = params.get('redirect') || 'dashboard.html';
 
             $('#status').text('You have been logged out. Redirecting...');
 

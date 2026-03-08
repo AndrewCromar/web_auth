@@ -14,7 +14,7 @@ $(function() {
             .done(function(data) {
                 $('#output').css('color', 'green').text('Success! Redirecting...');
                 const params = new URLSearchParams(window.location.search);
-                window.location.href = params.get('redirect') || 'https://wishlist.andrewcromar.org';
+                window.location.href = params.get('redirect') || 'dashboard.html';
             })
             .fail(function(xhr) {
                 const err = xhr.responseJSON ? xhr.responseJSON.error : 'Invalid code';

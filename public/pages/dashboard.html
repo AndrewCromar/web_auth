@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="../styles/root.css">
+<link rel="stylesheet" href="../styles/main.css">
+<link rel="stylesheet" href="../styles/content.css">
+<link rel="stylesheet" href="../styles/center-center.css">
+<link rel="stylesheet" href="../styles/form.css">
+<link rel="stylesheet" href="../styles/spinner.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+<title>AUTH</title>
+
+<div class="content">
+    <div class="center-center">
+        <div id="loading">
+            <center>
+                <div class="spinner"></div>
+                <p>Loading...</p>
+            </center>
+        </div>
+
+        <div id="logged_in" style="display: none;">
+            <center>
+                <h2>Account</h2>
+            </center>
+            <p><strong>ID:</strong> <span id="user_id"></span></p>
+            <p><strong>Email:</strong> <span id="user_email"></span></p>
+            <button id="logout_btn">Logout</button>
+        </div>
+
+        <div id="logged_out" style="display: none;">
+            <center>
+                <h2>Not Logged In</h2>
+            </center>
+            <p>You are not currently logged in.</p>
+            <button id="login_btn">Login</button>
+        </div>
+    </div>
+</div>
+
+<script src="../scripts/dashboard.js"></script>

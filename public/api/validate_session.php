@@ -8,7 +8,7 @@ if ($user) {
     json_response([
         'authenticated' => true,
         'user' => [
-            'id' => $user['user_id'],
+            'id' => $user['id'],
             'email' => $user['email']
         ]
     ]);
