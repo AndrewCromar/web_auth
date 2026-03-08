@@ -7,7 +7,10 @@ $(function() {
         $btn.prop('disabled', true).text('Sending...');
         $('#output').text('');
 
-        $.post('../api/request_code.php', { email: email })
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirect = urlParams.get('redirect') || '';
+
+        $.post('../api/request_code.php', { email: email, redirect: redirect })
             .done(function(data) {
                 if (data.dev_code) {
                     alert("DM: Your login code is " + data.dev_code);
@@ -16,8 +19,6 @@ $(function() {
                 $('#output').css('color', 'green').text(data.message);
                 localStorage.setItem('auth_email', email);
 
-                const urlParams = new URLSearchParams(window.location.search);
-                const redirect = urlParams.get('redirect');
                 const verifyUrl = 'verify.html' + (redirect ? '?redirect=' + encodeURIComponent(redirect) : '');
                 window.location.href = verifyUrl;
             })
